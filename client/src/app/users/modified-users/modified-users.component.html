@@ -1,3 +1,118 @@
-<p>
-  modified-users works!
-</p>
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group" >
+                <label for="name">Name</label>
+                <input type="text" class="form-control" [(ngModel)]="usersFormData.username" id="name" name="name" value="name">
+            </div>
+            <!-- <div class="form-group">
+                <label for="subject">Subject</label>
+                <span style="color:red;">*</span>
+                <input type="text" class="form-control" [(ngModel)]="emailTemplateFormData.subject" id="subject" name="subject" value="subject">
+            </div>
+            <div class="form-group">
+                <label for="from_name">From_Name</label>
+                <span style="color:red;">*</span>
+                <input type="text" class="form-control" [(ngModel)]="emailTemplateFormData.from_name" name="from_name" id="from_name" value ="from_name">
+            </div>
+            <div class="form-group">
+                <label for="info">Info</label>
+                <span style="color:red;">*</span>
+                <input type="text" class="form-control" [(ngModel)]="emailTemplateFormData.info" name="info" id="info" value ="info">
+            </div>
+            <div class="form-group">
+                <label for="reply_to">Reply_To</label>
+                <span style="color:red;">*</span>
+                <input type="text" class="form-control" [(ngModel)]="emailTemplateFormData.reply_to" name="reply_to" id="reply_to" value ="reply_to">
+            </div> -->
+            <div class="group">
+                <div *ngIf="showSubmit; then submitFormButton; else updateFormButton"></div>
+                <ng-template #submitFormButton>
+                    <button class="btn btn-primary" type="submit" [disabled]="submitButton" (click)="add()">Submit</button>
+                </ng-template>
+                <ng-template #updateFormButton>
+                    <button type="submit" class="btn btn-logoGreen" [disabled]="submitButton" (click)="update()">Update</button>
+                </ng-template>
+                <button type="button" class="btn btn-outline-secondary" (click)="cancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="card shadow-sm">
+    <div class="addEmployeeTable">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row padding-left-1rem">
+                    <div class="searchBar">
+                        <div class="input-group">
+                            <input type="text" [(ngModel)]= 'searchValue' name="search" id="search" class="form-control"  (keyup.enter)="search(idSearch.value)" placeholder="search" #idSearch>
+                            <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" (click)="resetSearch()">
+                            <i class="fa fa-times">&nbsp;</i>
+                            </button>
+                            </span>
+                        </div>
+                    </div>
+                    <button class="btn searchSubmit" type="submit" (click)="search(idSearch.value)">
+                    <i class="fa fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                 <nav aria-label="Page navigation example" class="float-right">
+                    <!-- <pagination-controls previousLabel="" nextLabel="" (pageChange)="index($event)"></pagination-controls> -->
+                <!--<nav aria-label="Page navigation example" class="float-right">-->
+                <!--    <ul class="pagination">-->
+                <!--        <li class="page-item">-->
+                <!--            <a class="page-link previousBtn" aria-label="Previous">-->
+                <!--            <span aria-hidden="true">&laquo;</span>-->
+                <!--            <span class="sr-only">Previous</span>-->
+                <!--            </a>-->
+                <!--        </li>-->
+                <!--        <li class="page-item active">-->
+                <!--            <a class="page-link">1</a>-->
+                <!--        </li>-->
+                <!--        <li class="page-item">-->
+                <!--            <a class="page-link">2</a>-->
+                <!--        </li>-->
+                <!--        <li class="page-item">-->
+                <!--            <a class="page-link">3</a>-->
+                <!--        </li>-->
+                <!--        <li class="page-item">-->
+                <!--            <a class="page-link nextBtn" aria-label="Next">-->
+                <!--            <span aria-hidden="true">&raquo;</span>-->
+                <!--            <span class="sr-only">Next</span>-->
+                <!--            </a>-->
+                <!--        </li>-->
+                <!--    </ul>-->
+                </nav>
+                <!--<button class="btn customFieldBtn float-right" type="submit">ADD</button>-->
+            </div>
+        </div>
+        <div class="table-responsive tableBtn">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                      <th scope="col" [class.active]="order === 'username'" (click)="sort('username')">
+                        Name
+                        <span *ngIf="order === 'name'">
+                        <span *ngIf="arrowShow" [hidden]="reverse">▲</span>
+                        <span *ngIf="arrowShow" [hidden]="!reverse">▼</span>
+                        </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td>{{user.username}}</td>
+                        <td>
+                            <button type="button" class="btn btn-secondary" (click)="edit(user)" >EDIT</button>
+                            <button type="button" class="btn btn-warning" (click)="delete(emailTemplate.id)" >DELETE</button>
+                        </td>
+                    </tr>
+                 <tr *ngIf="showNoRecord"><td colspan="3" style="text-align:left;">No Records Found</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

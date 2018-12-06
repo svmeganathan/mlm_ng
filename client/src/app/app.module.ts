@@ -16,6 +16,9 @@ import { UsersComponent } from './users/users.component';
 import { HomeComponent } from './home/home.component';
 import { ModifiedUsersComponent } from './users/modified-users/modified-users.component';
 
+//packages
+// import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { ModifiedUsersComponent } from './users/modified-users/modified-users.co
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    // ToastrModule.forRoot({ positionClass: 'toast-top-center', maxOpened : 1 , preventDuplicates: true}),
   ],
   providers: [
     HttpService
